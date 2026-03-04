@@ -362,3 +362,94 @@
     </div>
   </header>
 
+  <main>
+    <div class="config-bar">
+      <div>
+        <label>RPC URL</label>
+        <input type="text" id="rpcUrl" placeholder="https://eth.llamarpc.com" />
+      </div>
+      <div>
+        <label>Contract</label>
+        <input type="text" id="contractAddr" placeholder="0x..." />
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button type="button" data-tab="dashboard">Dashboard</button>
+      <button type="button" data-tab="pods">Pods</button>
+      <button type="button" data-tab="positions">My positions</button>
+      <button type="button" data-tab="deposit">Deposit</button>
+      <button type="button" data-tab="withdraw">Withdraw / Claim</button>
+      <button type="button" data-tab="quote">Quote &amp; Simulate</button>
+      <button type="button" data-tab="health">Health &amp; Constants</button>
+      <button type="button" data-tab="help">Help</button>
+    </div>
+
+    <div id="view-dashboard" class="view visible">
+      <div class="card">
+        <h2>Protocol snapshot <button class="refresh-btn" id="btnRefreshDashboard">Refresh</button></h2>
+        <div id="dashboardStats" class="stats-row"></div>
+        <p id="dashboardPaused" class="msg warn" style="display:none;">Protocol is paused. New deposits disabled.</p>
+      </div>
+    </div>
+
+    <div id="view-pods" class="view">
+      <div class="card">
+        <h2>Savings pods</h2>
+        <ul id="podList" class="pod-list"></ul>
+        <p id="podListLoading" class="loading">Load contract and click a tab to fetch.</p>
+      </div>
+    </div>
+
+    <div id="view-positions" class="view">
+      <div class="card">
+        <h2>My positions</h2>
+        <div id="positionsList"></div>
+        <p id="positionsLoading" class="loading">Connect wallet and ensure contract is set.</p>
+      </div>
+    </div>
+
+    <div id="view-deposit" class="view">
+      <div class="card">
+        <h2>Deposit ETH</h2>
+        <p class="msg info">Select a pod and amount. Fee is deducted at deposit; net principal is locked until unlock time.</p>
+        <div class="form-group">
+          <label>Pod</label>
+          <select id="depositPodId"></select>
+        </div>
+        <div class="form-group">
+          <label>Amount (ETH)</label>
+          <input type="text" id="depositAmountEth" placeholder="0.1" />
+        </div>
+        <div class="form-group">
+          <button class="btn-primary" id="btnDeposit">Deposit</button>
+        </div>
+        <p id="depositMsg" class="msg" style="display:none;"></p>
+      </div>
+    </div>
+
+    <div id="view-withdraw" class="view">
+      <div class="card">
+        <h2>Withdraw &amp; claim</h2>
+        <p class="msg info">Withdraw unlocks principal + accrued reward. Claim reward only leaves principal locked.</p>
+        <div id="withdrawDeposits"></div>
+        <p id="withdrawLoading" class="loading">Load positions first from My positions or connect wallet.</p>
+      </div>
+    </div>
+
+    <div id="view-quote" class="view">
+      <div class="card">
+        <h2>Quote &amp; simulate</h2>
+        <p class="help-text">Enter an amount to see fee and net principal. Select a pod to simulate deposit (projected reward and unlock time).</p>
+        <div class="form-group">
+          <label>Amount (ETH)</label>
+          <input type="text" id="quoteAmountEth" placeholder="1" />
+        </div>
+        <div id="quoteResult" class="quote-box" style="display:none;"></div>
+        <div class="form-group" style="margin-top:1.25rem;">
+          <label>Simulate deposit in pod</label>
+          <select id="simulatePodId"></select>
+        </div>
+        <div id="simulateResult" class="quote-box" style="display:none;"></div>
+      </div>
+    </div>
